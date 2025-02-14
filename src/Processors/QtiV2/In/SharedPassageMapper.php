@@ -172,7 +172,7 @@ class SharedPassageMapper
     protected function parsePassageContentFromHtml($htmlString)
     {
         $htmlDom = new DOMDocument();
-        $htmlDom->loadHTML($htmlString);
+        $htmlDom->loadHTML(mb_convert_encoding($htmlString, 'HTML-ENTITIES', 'UTF-8'));
 
         /** @var DOMNodeList $body */
         $body = $htmlDom->getElementsByTagName('body');

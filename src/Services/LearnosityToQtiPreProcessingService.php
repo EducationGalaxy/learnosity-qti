@@ -130,6 +130,7 @@ class LearnosityToQtiPreProcessingService
         libxml_use_internal_errors(true);
 
         // Load the wrapped HTML
+        $htmlWrapped = $htmlWrapped == '' ? '' : mb_convert_encoding($htmlWrapped, 'HTML-ENTITIES', 'UTF-8');
         $doc->loadHTML($htmlWrapped, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
         // Clear any parsing errors
@@ -323,8 +324,9 @@ class LearnosityToQtiPreProcessingService
         if (empty($content)) return $content;
 
         $doc = new \DOMDocument('1.0', 'UTF-8');
+        $content = $content == '' ? '' : mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8');
         $doc->loadHTML($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-
+        
         // Remove API tabs as they are unsupported. We keep any widgets.
         $tabsParentDiv = null;
         // Find <div class="tabs"> and keep its parent as the new outer div
